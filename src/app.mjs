@@ -2,10 +2,17 @@ import express from "express";
 import { sequelize, initDb } from "./db/sequelize.mjs";
 import { productsRouter } from "./routes/products.mjs";
 import { loginRouter } from "./routes/login.mjs";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger.mjs";
 
 const app = express();
 app.use(express.json());
 const port = 3000;
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, { explorer: true })
+);
 
 app.use("/api/login", loginRouter);
 app.use("/api/products", productsRouter);
