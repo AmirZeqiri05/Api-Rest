@@ -2,11 +2,14 @@ import jwt from "jsonwebtoken";
 import { privateKey } from "./private_key.mjs";
 const auth = (req, res, next) => {
   const authorizationHeader = req.headers.authorization;
+  console.log(authorizationHeader);
   if (!authorizationHeader) {
     const message = `Vous n'avez pas fourni de jeton d'authentification. Ajoutez-en un dans l'en-tête de la requête.`;
     return res.status(401).json({ message });
   } else {
+    //
     const token = authorizationHeader.split(" ")[1];
+    console.log(token);
     const decodedToken = jwt.verify(
       token,
       privateKey,

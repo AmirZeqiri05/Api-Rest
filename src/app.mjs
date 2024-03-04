@@ -14,9 +14,6 @@ app.use(
   swaggerUi.setup(swaggerSpec, { explorer: true })
 );
 
-app.use("/api/login", loginRouter);
-app.use("/api/products", productsRouter);
-
 sequelize
   .authenticate()
   .then((_) =>
@@ -34,6 +31,7 @@ app.get("/api/", (req, res) => {
   res.redirect(`http://localhost:${port}/`);
 });
 
+app.use("/api/login", loginRouter);
 app.use("/api/products", productsRouter);
 
 app.use(({ res }) => {
